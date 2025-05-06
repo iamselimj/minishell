@@ -6,7 +6,7 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:30:17 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/05/06 06:16:40 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:47:25 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,24 @@
  *
  * @return (double) : The arctangent of y/x, in radians considering the quadrant
  */
-double	ft_atan2(double y, double x) {
-  double result;
+double	ft_atan2(double y, double x)
+{
+	double	result;
 
-  if (x == 0) {
-    if (y > 0)
-      result = 1.570796326794897;
-    else if (y < 0)
-      result = -1.570796326794897;
-    else
-      result = 0;
-  } else {
-    result = ft_atan(y / ft_sqrt(x * x + y * y));
-    if (x < 0)
-      result += 3.14159265358979;
-  }
-  return (result);
+	if (x == 0)
+	{
+		if (y > 0)
+			result = 1.570796326794897;
+		else if (y < 0)
+			result = -1.570796326794897;
+		else
+			result = 0;
+	}
+	else
+	{
+		result = ft_atan(y / ft_sqrt(x * x + y * y));
+		if (x < 0)
+			result += 3.14159265358979;
+	}
+	return (result);
 }

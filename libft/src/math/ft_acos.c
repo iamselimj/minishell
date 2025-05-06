@@ -6,7 +6,7 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:30:17 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/05/06 06:16:39 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:48:32 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
  * @return (double) : The arc cosine of the input value in radians. Returns
  *	-1 if the input is out of range.
  */
-double	ft_acos(double x) {
-  if (x < -1 || x > 1)
-    return (-1);
-  return (ft_atan2(ft_sqrt(1 - x * x), x));
+double	ft_acos(double x)
+{
+	if (x < -1 || x > 1)
+		return (-1);
+	return (ft_atan2(ft_sqrt(1 - x * x), x));
 }
