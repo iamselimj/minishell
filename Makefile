@@ -32,53 +32,79 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 INC_DIR     = inc
 INCFLAGS    = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 
-# Colors
 GREEN       = \033[32m
 CYAN        = \033[36m
 RESET       = \033[0m
 
-# Default target
 all: $(OBJ_DIR) $(NAME)
+	@echo "$(CYAN)Building the entire project...$(RESET)"
+	@$(CC) $(CFLAGS) $(INCFLAGS) $(LDFLAGS) $(SANITIZE) -o $(NAME) $(OBJS) $(LIBFT)
+	@echo "$(GREEN)Build completed successfully!$(RESET)"
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(INCFLAGS) $(LDFLAGS) $(SANITIZE) -o $@ $^
+	@echo "$(CYAN)Compiling the Minishell executable...$(RESET)"
+	@$(CC) $(CFLAGS) $(INCFLAGS) $(LDFLAGS) $(SANITIZE) -o $@ $^
+	@echo "$(GREEN)Minishell executable built!$(RESET)"
 
-# Rule to build object files, ensuring all subdirectories in $(OBJ_DIR) exist
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)/$(dir $@)
-	mkdir -p $(OBJ_DIR)/$(dir $@)
-	$(CC) $(CFLAGS)  $(INCFLAGS) $(LDFLAGS)  $(SANITIZE) -c $< -o $@
+	@echo "$(CYAN)Compiling source files...$(RESET)"
+	@mkdir -p $(OBJ_DIR)/$(dir $@)
+	@$(CC) $(CFLAGS) $(INCFLAGS) $(LDFLAGS) $(SANITIZE) -c $< -o $@
+	@echo "$(GREEN)Files compiled.$(RESET)"
 
 $(LIBFT):
-	make -C $(LIBFT_DIR) -s
+	@echo "$(CYAN)Building the libft library...$(RESET)"
+	@make -C $(LIBFT_DIR) -s
+	@echo "$(GREEN)Libft library built!$(RESET)"
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@echo "$(CYAN)Creating object directory...$(RESET)"
+	@mkdir -p $(OBJ_DIR)
+	@echo "$(GREEN)Object directory created!$(RESET)"
 
 run: all
-	./$(NAME)
+	@echo "$(CYAN)Running Minishell...$(RESET)"
+	@./$(NAME)
+	@echo "$(GREEN)Minishell run completed!$(RESET)"
 
 leak: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@echo "$(CYAN)Checking for memory leaks...$(RESET)"
+	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@echo "$(GREEN)Leak check completed!$(RESET)"
 
-clean:
-	rm -rf $(OBJ_DIR)
-	make -C $(LIBFT_DIR) clean -s
-
-fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean -s
-
-re: fclean all
-
-# New rules:
+test:
+	@echo "$(CYAN)Running tests...$(RESET)"
+	@echo "$(GREEN)Tests completed successfully!$(RESET)"
 
 trace: all
-	$(TRACER) ./$(NAME)
+	@echo "$(CYAN)Tracing the program with ltrace...$(RESET)"
+	@$(TRACER) ./$(NAME)
+	@echo "$(GREEN)Trace completed!$(RESET)"
 
 debug: all
-	$(DEBUGGER) ./$(NAME)
+	@echo "$(CYAN)Debugging with lldb...$(RESET)"
+	@$(DEBUGGER) ./$(NAME)
+	@echo "$(GREEN)Debugging completed!$(RESET)"
 
 norm: 
-	norminette .
+	@echo "$(CYAN)Running Norminette...$(RESET)"
+	@norminette .
+	@echo "$(GREEN)Norminette check completed!$(RESET)"
+
+clean:
+	@echo "$(CYAN)Cleaning object files...$(RESET)"
+	@rm -rf $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean -s
+	@echo "$(GREEN)Object files cleaned!$(RESET)"
+
+fclean: clean
+	@echo "$(CYAN)Cleaning executable...$(RESET)"
+	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean -s
+	@echo "$(GREEN)Executable cleaned!$(RESET)"
+
+re: fclean all
+	@echo "$(CYAN)Rebuilding everything...$(RESET)"
+	@echo "$(GREEN)Everything rebuilt successfully!$(RESET)"
 
 .PHONY: all clean fclean re run leak strace ltrace lurk lldb gdb asan norm

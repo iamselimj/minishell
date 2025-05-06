@@ -6,7 +6,7 @@
 #    By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 21:21:23 by kerberos          #+#    #+#              #
-#    Updated: 2025/05/06 06:31:13 by kerberos         ###   ########.fr        #
+#    Updated: 2025/05/06 07:10:55 by kerberos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ CFLAGS = -Wall -Wextra -Werror -g
 SANITIZE = -fsanitize=address
 
 SRC_DIR = src
-# Explicitly list all source files
 SRC_FILES = \
 	bool/ft_isalnum.c bool/ft_isalpha.c bool/ft_isascii.c bool/ft_isdigit.c \
 	bool/ft_islower.c bool/ft_isprint.c bool/ft_isspace.c bool/ft_isupper.c \
@@ -51,7 +50,6 @@ SRC_FILES = \
 	put/ft_putchar_fd.c \
 
 OBJ_DIR = obj
-# Correctly generate the object files with directory structure under obj/
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 INC_DIR = inc
@@ -59,26 +57,32 @@ INC_FLAGS = -I$(INC_DIR)
 
 # Default target
 all: $(NAME)
+	@echo "$(CYAN)Building the libft library...$(RESET)"
+	@ar rcs $@ $^
+	@echo "$(GREEN)Libft library built successfully!$(RESET)"
 
-# Rule to build the library
 $(NAME): $(OBJ_FILES)
-	ar rcs $@ $^
+	@echo "$(CYAN)Creating the libft.a archive...$(RESET)"
+	@ar rcs $@ $^
+	@echo "$(GREEN)Libft.a created successfully!$(RESET)"
 
-# Rule to build object files, ensuring subdirectories in $(OBJ_DIR) are created
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)         # Create the directory for the object file
-	$(CC) $(CFLAGS) $(SANITIZE) $(INC_FLAGS) -c $< -o $@
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(SANITIZE) $(INC_FLAGS) -c $< -o $@
 
-# Clean object files
 clean:
-	rm -rf $(OBJ_DIR)
+	@echo "$(CYAN)Cleaning object files...$(RESET)"
+	@rm -rf $(OBJ_DIR)
+	@echo "$(GREEN)Object files cleaned!$(RESET)"
 
-# Full clean (objects + library)
 fclean: clean
-	rm -f $(NAME)
+	@echo "$(CYAN)Cleaning the libft.a library...$(RESET)"
+	@rm -f $(NAME)
+	@echo "$(GREEN)Libft.a library removed!$(RESET)"
 
-# Rebuild from scratch
 re: fclean all
+	@echo "$(CYAN)Rebuilding everything...$(RESET)"
+	@echo "$(GREEN)Everything rebuilt successfully!$(RESET)"
 
 # Specify default target
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:32:13 by kerberos          #+#    #+#             */
-/*   Updated: 2025/05/06 02:18:32 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 07:12:20 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@ static void	ft_sighandler(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	// else if (sig == SIGQUIT)
-	// {
-	// 	(void)sig;
-	// }
-	// else if (sig == SIGTERM)
-	// {
-	// 	rl_clear_history();
-	// }
 }
 
 void	ft_sighandlers(void)
@@ -39,6 +31,4 @@ void	ft_sighandlers(void)
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = ft_sighandler;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGTERM, &sa, NULL);
 }
