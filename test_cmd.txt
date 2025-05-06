@@ -1,7 +1,0 @@
-echo "Starting process..." && (echo "This will run first" && ls -l | grep "minishell") > output.txt && cat output.txt && echo "Process finished!" &
-
-cat file.txt | grep "pattern" && echo "Success" || echo "Failure" > output.txt >> output.log 2>&1 | ls -l > result.txt
-
-(cat file.txt | grep "$HOME" && echo "Success" || echo "Failure" > output.txt >> output.log 2>&1) | ls -l > result.txt
-
-(cat file.txt | grep "$HOME" && echo "Success" || echo "Failure" > output.txt >> output.log 2>&1) | ls -l > result.txt

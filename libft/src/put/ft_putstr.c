@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 10:32:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/29 06:42:34 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
-int	ft_putstr(char *str) {
-  int count;
+/**
+ * @brief Prints a string to the standard output.
+ *
+ * @param str (char *) : The string to be printed.
+ *
+ * @return (int) : The total number of characters printed.
+ */
+int	ft_putstr(char *str)
+{
+	int	len;
 
-  count = 0;
-  if (!str)
-    return (0);
-  while (*str) {
-    count += ft_putchar(*str);
-    str++;
-  }
-  return (count);
+	len = 0;
+	if (!str)
+		return (0);
+	while (*str)
+	{
+		len += ft_putchar(*str);
+		str++;
+	}
+	return (len);
 }

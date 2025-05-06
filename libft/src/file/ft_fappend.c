@@ -6,33 +6,28 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:03:10 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:35:13 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:25:04 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_fappend
- * @brief Appends a line to an existing file.
+ * @brief Appends a line to the end of a file.
  *
- * This function opens the specified file in append mode and writes the provided
- * line to the end of the file. If the file doesn't exist or there is an error
- * during the write process, it returns -1.
+ * @param path (const char *) : Path to the file to append to.
+ * @param line (const char *) : The string to append to the file.
  *
- * @params path (const char *) : The path of the file to append to.
- * @params line (const char *) : The line of text to append to the file.
- *
- * @return (int) : Returns 0 on success, -1 on failure.
+ * @return (int) : 0 on success, -1 on failure (file error or write error).
  */
-int	ft_fappend(const char *path, const char *line)
+int	ft_fappend(const char *path, char *line)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_WRONLY | O_APPEND);
 	if (fd == -1)
 		return (-1);
-	if (write(fd, line, ft_strlen(line)) == -1)
+	if (ft_putstr_fd(line, fd) == -1)
 	{
 		close(fd);
 		return (-1);

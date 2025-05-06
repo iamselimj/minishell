@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:03:10 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 19:04:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:06:17 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_strjoin
- * @brief Concatenates two strings into a new string.
+ * @brief Allocates and joins `s1` and `s2` into a new string.
  *
- * This function allocates memory and concatenates the string `s1` with `s2`.
- * The result is a new string containing the contents of `s1` followed by `s2`.
-
-	* The original strings are not modified. If either of the input strings is `NULL`,
- * the function returns `NULL`.
+ * @param s1 (const char *) : First string.
+ * @param s2 (const char *) : Second string.
  *
- * @param s1 (const char *) : The first string to join.
- * @param s2 (const char *) : The second string to join.
+ * @return (char *) : New concatenated string, or NULL on failure.
  *
- * @return (char *) : A new string containing the concatenated result, or `NULL`
- * if memory allocation fails or any input is `NULL`.
- *
- * @note The caller is responsible for freeing the returned string.
+ * @note Caller must free the returned string.
  */
+
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*res;

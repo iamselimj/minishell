@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:23:10 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 19:05:02 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:06:17 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_strlcpy
- * @brief Copies a string to a destination buffer,
-	ensuring it does not overflow.
+ * @brief Copies a string to a destination buffer, ensuring no overflow.
  *
- * This function copies up to `size
-	- 1` characters from the string `src` to `dst`,
- * null-terminating the result. It ensures that no more than `size
-	- 1` characters
- * are copied, and the destination buffer is always null-terminated,
-	avoiding buffer
- * overflows.
+ * @param dst (char *) : Destination buffer for the copied string.
+ * @param src (const char *) : Source string to copy.
+ * @param size (size_t) : Total size of the destination buffer.
  *
- * @param dst (char *) : The destination buffer where the string will be copied.
- * @param src (const char *) : The source string to be copied.
-
-	* @param size (size_t) : The total size of the destination buffer (including space for the null terminator).
- *
-
-	* @return (size_t) : The total length of the string that would have been copied if
- *                    `dst` was large enough, excluding the null terminator.
+ * @return (size_t) : Total length of the string that would have been copied.
  */
+size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size)
+{
+	size_t	i;
+
+	i = 0;
+	if (dest_size == 0)
+		return (ft_strlen(src));
+	while (i < dest_size - 1 && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (ft_strlen(src));
+}

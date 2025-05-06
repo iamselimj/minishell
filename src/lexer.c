@@ -6,7 +6,7 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:33:14 by kerberos          #+#    #+#             */
-/*   Updated: 2025/05/06 01:48:15 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 05:59:12 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ static int	handle_word_while(t_token **tokens, const char *line, int *i,
 			break ;
 		(*i)++;
 	}
-	str = ft_substr(line, start, *i - start);
+	str = ft_strsub(line, start, *i - start);
 	if (str)
 	{
 		add_token(tokens, WORD, str);
@@ -176,7 +176,7 @@ static int	handle_single_quotes(t_token **tokens, const char *line, int *i,
 		(*i)++;
 	if (line[*i] == '\'')
 	{
-		str = ft_substr(line, start + 1, *i - start - 1);
+		str = ft_strsub(line, start + 1, *i - start - 1);
 		add_token(tokens, WORD, str);
 		free(str);
 		(*i)++;
@@ -200,7 +200,7 @@ static int	handle_double_quotes(t_token **tokens, const char *line, int *i,
 	}
 	if (line[*i] == '"')
 	{
-		str = ft_substr(line, start + 1, *i - start - 1);
+		str = ft_strsub(line, start + 1, *i - start - 1);
 		add_token(tokens, WORD, str);
 		free(str);
 		(*i)++;
@@ -238,7 +238,7 @@ static int	handle_env_variable(t_token **tokens, const char *line, int *i,
 {
 	char	*var_name;
 
-	var_name = ft_substr(line, start, *i - start);
+	var_name = ft_strsub(line, start, *i - start);
 	if (!var_name)
 		return (0);
 	add_token(tokens, VAR, var_name);

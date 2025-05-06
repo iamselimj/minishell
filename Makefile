@@ -13,24 +13,24 @@
 NAME        = minishell
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g
-LDFLAGS     = -lreadline
+CFLAGS      = -Wall -Wextra -Werror -g 
+SANITIZE    = -fsanitize=address
+LDFLAGS		= -Lreadline -lreadline -Llibft -lft
+
+TRACER = ltrace
+DEBUGGER = lldb
 
 SRC_DIR     = src
+SRCS        = main.c lexer.c token.c signal.c banner.c prompt.c
+
 OBJ_DIR     = obj
-INC_DIR     = inc
+OBJS        = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 LIBFT_DIR   = libft
 LIBFT       = $(LIBFT_DIR)/libft.a
 
-INCFLAGS    = -I$(INC_DIR) -I$(LIBFT_DIR)/$(INC_DIR)
-
-
-# Source files
-SRCS        = main.c lexer.c token.c signal.c banner.c prompt.c
-
-# Object files
-OBJS        = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+INC_DIR     = inc
+INCFLAGS    = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 
 # Colors
 GREEN       = \033[32m
@@ -41,34 +41,44 @@ RESET       = \033[0m
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(INCFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) $(INCFLAGS) $(LDFLAGS) $(SANITIZE) -o $@ $^
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
+# Rule to build object files, ensuring all subdirectories in $(OBJ_DIR) exist
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)/$(dir $@)
+	mkdir -p $(OBJ_DIR)/$(dir $@)
+	$(CC) $(CFLAGS)  $(INCFLAGS) $(LDFLAGS)  $(SANITIZE) -c $< -o $@
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR) -s
+	make -C $(LIBFT_DIR) -s
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)
 
 run: all
-	@./$(NAME)
+	./$(NAME)
 
 leak: all
-	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 clean:
-	@rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean -s
-	@clear
+	rm -rf $(OBJ_DIR)
+	make -C $(LIBFT_DIR) clean -s
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C $(LIBFT_DIR) fclean -s
-	@clear
+	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean -s
 
 re: fclean all
 
-.PHONY: all clean fclean re run leak
+# New rules:
+
+trace: all
+	$(TRACER) ./$(NAME)
+
+debug: all
+	$(DEBUGGER) ./$(NAME)
+
+norm: 
+	norminette .
+
+.PHONY: all clean fclean re run leak strace ltrace lurk lldb gdb asan norm

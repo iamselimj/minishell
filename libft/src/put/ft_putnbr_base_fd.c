@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base_fd.c                                :+:      :+:    :+:   */
+/*   ft_putnbr_base_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:16:47 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 10:32:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/29 06:42:18 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
-int	ft_putnbr_base_fd(int n, int base, int fd)
-{
-	char	*digits;
-	int		count;
+/**
+ * @brief Prints an integer in a specified base to the specified fd.
+ *
+ * @param n (int) : The number to be printed.
+ * @param base (int) : The base for the number
+ * @param fd (int) : The file descriptor to print the number to.
+ *
+ * @return (int) : The total number of characters printed.
+ */
+int	ft_putnbr_base_fd(int n, int base, int fd) {
+  char *digits;
+  int len;
 
-	digits = "0123456789ABCDEF";
-	count = 0;
-	if (n < 0 && base == 10)
-	{
-		count += ft_putchar_fd('-', fd);
-		n = -n;
-	}
-	if (n >= base)
-		count += ft_putnbr_base_fd(n / base, base, fd);
-	count += ft_putchar_fd(digits[n % base], fd);
-	return (count);
+  len = 0;
+  digits = "0123456789ABCDEF";
+  if (n < 0 && base == 10) {
+    len += ft_putchar_fd('-', fd);
+    n = -n;
+  }
+  if (n >= base)
+    len += ft_putnbr_base_fd(n / base, base, fd);
+  len += ft_putchar_fd(digits[n % base], fd);
+  return (len);
 }

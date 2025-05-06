@@ -6,12 +6,21 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 10:32:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:30:04 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
+/**
+ * @brief Handles a single fmt specifier and prints the corresponding value
+ *
+ * @param specifier (char) : fmt character (e.g. 's', 'd', 'x', etc.)
+ * @param args (va_list) : variadic argument list
+ * @param fd (int) : output file descriptor
+ *
+ * @return (int) : number of characters printed
+ */
 static int	handle_specifier_fd(char specifier, va_list args, int fd)
 {
 	if (specifier == 's')
@@ -26,26 +35,34 @@ static int	handle_specifier_fd(char specifier, va_list args, int fd)
 		return (0);
 }
 
-int	ft_printf_fd(int fd, const char *format, ...)
+/**
+ * @brief Custom printf that outputs fmtted text to a file descriptor
+ *
+ * @param fd (int) : target file descriptor
+ * @param fmt (const char *) : fmt string containing specifiers
+ *
+ * @return (int) : total number of characters written
+ */
+int	ft_printf_fd(int fd, const char *fmt, ...)
 {
+	int		printed;
 	va_list	args;
 	int		len;
-	int		i;
 
 	len = 0;
-	i = 0;
-	va_start(args, format);
-	while (format[i])
+	printed = 0;
+	va_start(args, fmt);
+	while (fmt[len])
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (fmt[len] == '%' && fmt[len + 1])
 		{
-			i++;
-			len += handle_specifier_fd(format[i], args, fd);
+			len++;
+			printed += handle_specifier_fd(fmt[len], args, fd);
 		}
 		else
-			len += ft_putchar_fd(format[i], fd);
-		i++;
+			printed += ft_putchar_fd(fmt[len], fd);
+		len++;
 	}
 	va_end(args);
-	return (len);
+	return (printed);
 }

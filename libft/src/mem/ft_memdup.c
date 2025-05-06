@@ -6,32 +6,25 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:16:47 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:46:14 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:15:45 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_memdup
- * @brief Duplicates a block of memory.
+ * @brief Duplicates a memory block by allocating new memory and copying
+ * the contents.
  *
-
-	* This function allocates a new memory block and copies `size` bytes from the given pointer `ptr` into the new block.
-
-	* The new memory block is initialized using `ft_calloc` and then the content is copied using `ft_memcpy`.
- * If the allocation fails, `NULL` is returned.
+ * @param ptr (void *) : Pointer to the memory block to duplicate.
+ * @param size (size_t) : The size of the memory block to duplicate.
  *
- * @param ptr (void *) : Pointer to the memory to duplicate.
- * @param size (size_t) : The number of bytes to duplicate.
- *
-
-	* @return (void *) : A pointer to the newly allocated memory block containing the copied data,
-	or `NULL` on failure.
+ * @return (void *) : Pointer to the newly allocated memory block containing
+ * the duplicated data, or NULL if the allocation fails.
  */
 void	*ft_memdup(void *ptr, size_t size)
 {
-	void *new_ptr;
+	void	*new_ptr;
 
 	new_ptr = ft_calloc(1, size);
 	if (new_ptr == NULL)

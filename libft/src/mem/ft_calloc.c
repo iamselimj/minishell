@@ -6,27 +6,19 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:01:45 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:44:37 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:15:45 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_calloc
- * @brief Allocates memory for an array of `count` elements,
-	each of size `size`,
- *        and initializes all bytes to zero.
+ * @brief Allocate memory for `count` elem of `size` bytes, init all to zeroes.
  *
- * This function is similar to `malloc`, but it also ensures that the allocated
- * memory is zeroed out, which is important for avoiding uninitialized memory
- * issues. The memory is set to zero byte by byte.
+ * @param count (size_t) : Number of elements.
+ * @param size (size_t) : Size of each element.
  *
- * @param count (size_t) : The number of elements to allocate.
- * @param size (size_t) : The size of each element in the array.
- *
- * @return (void *) : A pointer to the allocated memory,
-	or NULL if the allocation fails.
+ * @return (void *) : Pointer to allocated memory, or NULL on failure.
  */
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -34,7 +26,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t			i;
 
 	i = 0;
-	tmp = malloc(count * size);
+	tmp = (unsigned char *)malloc(count * size);
 	if (!tmp)
 		return (NULL);
 	while (i < count * size)

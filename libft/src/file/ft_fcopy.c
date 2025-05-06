@@ -5,42 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 14:03:10 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:35:17 by kerberos         ###   ########.fr       */
+/*   Created: 2025/05/05 20:31:51 by kerberos          #+#    #+#             */
+/*   Updated: 2025/05/06 06:25:42 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_fcopy
+ * @brief Closes two file descriptors and returns a status code.
+ *
+ * @param fd1 (int) : First file descriptor to close.
+ * @param fd2 (int) : Second file descriptor to close.
+ * @param ret (int) : Value to return after closing.
+ *
+ * @return (int) : The value of ret.
+ */
+static int	close_all(int fd1, int fd2, int ret)
+{
+	close(fd1);
+	close(fd2);
+	return (ret);
+}
+
+/**
  * @brief Copies the contents of one file to another.
  *
- * This function opens the source file in read-only mode and the destination
- * file in write-only mode. It reads the contents of the source file in chunks
- * and writes them to the destination file. If any error occurs during reading
- * or writing, it returns -1.
+ * @param spath (const char *) : Path to the source file.
+ * @param dpath (const char *) : Path to the destination file.
  *
- * @params src (const char *) : The path of the source file.
- * @params dst (const char *) : The path of the destination file.
- *
- * @return (int) : Returns 0 on success, -1 on failure.
+ * @return (int) : 0 on success, -1 on failure (file or read/write error).
  */
-int	ft_fcopy(const char *src, const char *dst)
+int	ft_fcopy(const char *spath, const char *dpath)
 {
-	int src_fd;
-	int dst_fd;
-	char buf[1024];
-	ssize_t read_bytes;
+	int		sfd;
+	int		dfd;
+	char	buf[1024];
+	ssize_t	bytes;
 
-	src_fd = open(src, O_RDONLY);
-	if (src_fd == -1)
+	sfd = open(spath, O_RDONLY);
+	if (sfd == -1)
 		return (-1);
-	dst_fd = open(dst, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (dst_fd == -1)
-		return (close(src_fd), -1);
-	while ((read_bytes = read(src_fd, buf, sizeof(buf))) > 0)
-		if (write(dst_fd, buf, read_bytes) == -1)
-			return (close(src_fd), close(dst_fd), -1);
-	return (close(src_fd), close(dst_fd), 0);
+	dfd = open(dpath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (dfd == -1)
+		return (close(sfd), -1);
+	bytes = read(sfd, buf, sizeof(buf));
+	while (bytes > 0)
+	{
+		if (ft_putstr_fd(buf, dfd) == -1)
+			return (close_all(sfd, dfd, -1));
+		bytes = read(sfd, buf, sizeof(buf));
+	}
+	if (bytes == -1)
+		return (close_all(sfd, dfd, -1));
+	return (close_all(sfd, dfd, 0));
 }

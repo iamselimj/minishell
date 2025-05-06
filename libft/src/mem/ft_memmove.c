@@ -6,33 +6,27 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:20:01 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:46:37 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:15:45 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
 /**
- * @function ft_memmove
- * @brief Safely copies memory from one location to another.
- *
- * This function copies `len` bytes from the memory area `src` to `dst`,
-	ensuring that the copy is safe even when the memory regions overlap.
-
-	* If the destination memory block (`dst`) is located after the source memory block (`src`),
-	the copy happens in reverse order to avoid overwriting the source data before it is copied.
- * If the memory regions do not overlap, the copying proceeds as usual.
+ * @brief Copies a memory block from source to destination, handling overlapping
+ * regions correctly.
  *
  * @param dst (void *) : Pointer to the destination memory block.
  * @param src (const void *) : Pointer to the source memory block.
- * @param len (size_t) : The number of bytes to copy.
+ * @param len (size_t) : Number of bytes to copy.
  *
- * @return (void *) : A pointer to the destination memory block (`dst`).
+ * @return (void *) : Pointer to the destination memory block, or NULL if either
+ * the destination or source is NULL.
  */
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char *c_dst;
-	const unsigned char *c_src;
+	unsigned char		*c_dst;
+	const unsigned char	*c_src;
 
 	if (!dst && !src)
 		return (NULL);

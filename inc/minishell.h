@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+
-	+:+     */
+		+:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+
-	+#+        */
+		+#+        */
 /*                                                +#+#+#+#+#+
-	+#+           */
+		+#+           */
 /*   Created: 2025/04/26 17:40:42 by kerberos          #+#    #+#             */
 /*   Updated: 2025/04/26 17:40:42 by kerberos         ###   ########.fr       */
 /*                                                                            */
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -80,7 +81,7 @@ typedef struct s_ast_node
 	struct t_ast_node *left;
 } t_ast_node;
 
-char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*ft_strsub(const char *s, unsigned int start, size_t len);
 t_token	*new_token(t_token_type type, const char *str);
 void	add_token(t_token **tokens, t_token_type type, const char *str);
 void	print_tokens(t_token *tokens);

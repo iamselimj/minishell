@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   ft_strtok.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:09:25 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 20:48:16 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:06:17 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
 /**
- * @function ft_strtok
- * @brief Tokenizes a string using a specified delimiter,
-	with non-reentrant behavior.
+ * @brief Tokenizes a string based on a set of delimiters.
  *
- * This function returns the next token in the string `str` by breaking it at
- * the delimiter characters defined in `delim`. It uses a static variable to
- * store the state of the string between calls, making it non-reentrant.
+ * @param str (char *) : The string to be tokenized. If NULL,
+ * continues tokenizing previous string from where it was left off.
+ * @param delim (const char *) : A string containing all delimiter characters.
  *
- * @param str (char *) : The string to be tokenized. On subsequent calls, this
- *                        parameter should be `NULL`.
- * @param delim (const char *) : The string containing delimiter characters.
- *
- * @return (char *) : A pointer to the next token in the string, or NULL if
- *                    no more tokens are available.
+ * @return (char *) : A pointer to the next token, or NULL if no more tokens.
  */
 char	*ft_strtok(char *str, const char *delim)
 {
@@ -37,7 +30,7 @@ char	*ft_strtok(char *str, const char *delim)
 		saved_str = str;
 	if (!saved_str)
 		return (NULL);
-	saved_str = ft_skipdel(saved_str, delim);
+	saved_str = ft_skipcset(saved_str, delim);
 	if (*saved_str == '\0')
 	{
 		saved_str = NULL;

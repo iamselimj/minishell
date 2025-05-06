@@ -6,32 +6,23 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:19:43 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:15:40 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
 /**
- * @function ft_fnv1a
  * @brief Implements the FNV-1a hashing algorithm for strings.
  *
-
-	* This function computes a hash value for the input string `str` using the FNV-1a algorithm.
-
-	* The FNV-1a algorithm involves XOR'ing each byte of the string with the current hash,
-
-	* then multiplying the result by a prime number. This process is repeated for every byte
- * in the string.
- *
- * @params str (const char*) : The null-terminated string to hash.
+ * @param str (const char*) : The null-terminated string to hash.
  *
  * @return (unsigned long) : The computed hash value for the string.
  */
 unsigned long	ft_fnv1a(const char *str)
 {
-	unsigned long hash;
-	int c;
+	unsigned long	hash;
+	int				c;
 
 	hash = 14695981039346656037U;
 	while (*str)

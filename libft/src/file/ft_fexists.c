@@ -6,23 +6,18 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:03:10 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 18:35:25 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:16:30 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
 /**
- * @function ft_fexists
- * @brief Checks if a file exists at the given path.
+ * @brief Checks if a file exists at the specified path.
  *
- * This function uses the `access` system call to check if a file exists at
- * the specified path. If the file exists, it returns 1; otherwise,
-	it returns 0.
+ * @param path (const char *) : The path of the file to check.
  *
- * @params path (const char *) : The path to the file to check.
- *
- * @return (int) : Returns 1 if the file exists, 0 otherwise.
+ * @return (int) : 1 if the file exists, 0 if it does not.
  */
 int	ft_fexists(const char *path)
 {

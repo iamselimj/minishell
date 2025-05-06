@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:11:27 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 19:06:38 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:06:17 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_strrchr
- * @brief Locates the last occurrence of a character in a string.
- *
-
-	* This function searches for the last occurrence of the character `c` in the string `str`.
-
-	* It returns a pointer to the last occurrence of `c` within `str`. If `c` is not found in the string,
- * it returns `NULL`. If `c` is the null-terminator (`'\0'`),
-	the function returns a pointer to the
- * terminating null character at the end of the string.
+ * @brief Finds the last occurrence of a character in a string.
  *
  * @param str (const char *) : The string to search.
- * @param c (int) : The character to search for. It is passed as an integer,
-	but is cast to a `char` internally.
+ * @param c (int) : The character to find (passed as an integer).
  *
-
-	* @return (char *) : A pointer to the last occurrence of the character `c` in the string `str`,
-	or `NULL`
- * if `c` is not found.
+ * @return (char *) : Pointer to the last occurrence of `c` or `NULL`.
  */
-
 char	*ft_strrchr(const char *str, int c)
 {
 	char	*res;

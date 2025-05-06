@@ -10,26 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function new_str
-
-	* @brief Creates a new string by copying a section of `s1` from index `start` to `end`.
+ * @brief Allocates and copies `len` chars from `s1` starting at `start`.
  *
- * This function allocates memory for a new string and copies a substring of
-
-	* `s1` starting from index `start` and ending at `end` (inclusive). If the length
- * of the substring is 0 or the start is out of bounds,
-	it returns an empty string.
+ * @param s1 (const char *) : Source string.
+ * @param start (size_t) : Start index.
+ * @param len (size_t) : Number of characters.
  *
- * @param s1 (const char *) : The source string to extract the substring from.
- * @param start (size_t) : The starting index of the substring.
- * @param end (size_t) : The ending index of the substring (inclusive).
- *
-
-	* @return (char *) : A newly allocated string containing the extracted substring,
- *                    or an empty string if the length is 0.
+ * @return (char *) : New substring or empty string.
  */
 static char	*new_str(const char *s1, size_t start, size_t len)
 {
@@ -52,17 +42,12 @@ static char	*new_str(const char *s1, size_t start, size_t len)
 
 /**
  * @function to_trim
- * @brief Checks if a character `c` is present in the set of characters `set`.
+ * @brief Checks if `c` is in `set`.
  *
-
-	* This function checks if the character `c` exists in the string `set`. If it does,
- * it returns 1 (indicating the character should be trimmed). If not,
-	it returns 0.
+ * @param set (const char *) : Characters to trim.
+ * @param c (char) : Character to check.
  *
- * @param set (const char *) : The string containing the set of characters.
- * @param c (char) : The character to check.
- *
- * @return (int) : 1 if `c` is found in `set`, 0 otherwise.
+ * @return (int) : 1 if found, 0 otherwise.
  */
 static int	to_trim(const char *set, char c)
 {
@@ -80,23 +65,17 @@ static int	to_trim(const char *set, char c)
 
 /**
  * @function ft_strtrim
- * @brief Trims the characters in `set` from the beginning and end of `s1`.
+ * @brief Trims characters in `set` from start and end of `s1`.
  *
- * This function returns a new string with leading and trailing characters from
- * `set` removed from the string `s1`. If either `s1` or `set` is NULL, the
- * function returns NULL. If `s1` is an empty string,
-	it returns an empty string.
+ * @param s1 (const char *) : String to trim.
+ * @param set (const char *) : Characters to remove.
  *
- * @param s1 (const char *) : The string to be trimmed.
- * @param set (const char *) : The set of characters to be trimmed from `s1`.
- *
- * @return (char *) : A new string with characters from `set` removed from both
- *                    ends of `s1`, or NULL if memory allocation fails.
+ * @return (char *) : Trimmed new string or NULL.
  */
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (!s1 || !set)
 		return (NULL);

@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 10:32:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/04/29 06:42:07 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
-int	ft_puthex(unsigned int n, char format)
+/**
+ * @brief Prints an unsigned integer in hexadecimal format to the specified fd.
+ *
+ * @param n (unsigned int) : The number to be printed in hexadecimal.
+ * @param fmt (char) : Format specifier ('x' for lowercase, 'X' for uppercase).
+ *
+ * @return (int) : The total number of characters printed.
+ */
+int	ft_puthex(unsigned int n, char fmt)
 {
-	char	hex[] = "0123456789abcdef";
-	char	HEX[] = "0123456789ABCDEF";
-	int		len;
+	const char	*hex;
+	int			len;
 
+	hex = ft_gethex(fmt);
 	len = 0;
 	if (n == 0)
 		return (ft_putchar('0'));
-	if (format == 'X')
-		while (n > 0)
-		{
-			ft_putchar(HEX[n % 16]);
-			n /= 16;
-			len++;
-		}
-	else if (format == 'x')
-		while (n > 0)
-		{
-			ft_putchar(hex[n % 16]);
-			n /= 16;
-			len++;
-		}
+	while (n > 0)
+	{
+		ft_putchar(hex[n % 16]);
+		n /= 16;
+		len++;
+	}
 	return (len);
 }

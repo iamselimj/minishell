@@ -6,23 +6,14 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 19:20:43 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:16:40 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
 /**
- * @function ft_exp
  * @brief Computes the value of `x` raised to the power of `n` (x^n).
- *
-
-	* This function calculates `x` raised to the power `n` by multiplying `x` by itself
- * `n` times. If `n` is negative,
-	it computes the reciprocal of `x` raised to the
- * positive value of `n`. If `n` is 0, the function returns 1,
-	as any number raised
- * to the power of 0 is 1.
  *
  * @param x (double) : The base value.
  * @param n (int) : The exponent value.

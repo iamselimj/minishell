@@ -6,28 +6,35 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:12:22 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 10:32:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:16:21 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
-int	ft_putnbr(int n)
+/**
+ * @brief Prints a long long integer to the standard output.
+ *
+ * @param num (long long) : The number to be printed.
+ *
+ * @return (int) : The total number of characters printed.
+ */
+int	ft_putnbr(long long num)
 {
-	int		count;
+	int		len;
 	char	digit;
 
-	count = 0;
-	if (n == -2147483648)
-		return (ft_putstr("-2147483648"));
-	if (n < 0)
+	len = 0;
+	if (num == -9223372036854775807LL - 1)
+		return (ft_putstr("-9223372036854775808"));
+	if (num < 0)
 	{
-		count += ft_putchar('-');
-		n = -n;
+		len += ft_putchar('-');
+		num *= -1;
 	}
-	if (n >= 10)
-		count += ft_putnbr(n / 10);
-	digit = n % 10 + '0';
-	count += ft_putchar(digit);
-	return (count);
+	if (num >= 10)
+		len += ft_putnbr(num / 10);
+	digit = (num % 10) + '0';
+	len += ft_putchar(digit);
+	return (len);
 }

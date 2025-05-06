@@ -6,30 +6,19 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 19:02:24 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:16:08 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
 /**
- * @function ft_strcmp
- * @brief Compares two strings lexicographically.
+ * @brief Lexicographically compares two strings.
  *
-
-	* This function compares two null-terminated strings `s1` and `s2` character by character.
- * It returns a negative value if `s1` is lexicographically less than `s2`,
-	a positive value
- * if `s1` is greater than `s2`, or 0 if both strings are equal.
+ * @param s1 (const char *) : First string.
+ * @param s2 (const char *) : Second string.
  *
- * The comparison stops as soon as a difference is found,
-	or when the null-terminator is reached in either string.
- *
- * @param s1 (const char *) : The first string to compare.
- * @param s2 (const char *) : The second string to compare.
- *
- * @return (int) : A negative, positive,
-	or zero value depending on the result of the comparison.
+ * @return (int) : Comparison result.
  */
 int	ft_strcmp(const char *s1, const char *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 19:46:07 by kerberos          #+#    #+#             */
-/*   Updated: 2025/05/06 02:18:30 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 02:29:35 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ char	*ft_readline(const char *prompt)
 
 int	main(int ac, char **av, char **envp)
 {
-	char	**envs;
 	char	*line;
 	t_token	*tokens;
 
 	(void)ac;
 	(void)av;
+	(void)envp;
 	ft_sighandlers();
 	ft_display_banner();
-	envs = ft_dumpenvs(envp);
-	(void)envs;
 	if (isatty(STDIN_FILENO))
 	{
 		while (1)

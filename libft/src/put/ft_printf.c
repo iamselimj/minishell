@@ -6,12 +6,20 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:17:16 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 10:32:12 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:16:21 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "libft.h"
 
+/**
+ * @brief Handles a single fmt specifier and prints the corresponding value
+ *
+ * @param specifier (char) : fmt character (e.g. 's', 'd', 'x', etc.)
+ * @param args (va_list) : variadic argument list
+ *
+ * @return (int) : number of characters printed
+ */
 static int	handle_specifier(char specifier, va_list args)
 {
 	if (specifier == 's')
@@ -26,7 +34,14 @@ static int	handle_specifier(char specifier, va_list args)
 		return (0);
 }
 
-int	ft_printf(const char *format, ...)
+/**
+ * @brief Custom printf that prints fmtted output to stdout
+ *
+ * @param fmt (const char *) : fmt string containing specifiers
+ *
+ * @return (int) : total number of characters written
+ */
+int	ft_printf(const char *fmt, ...)
 {
 	va_list	args;
 	int		len;
@@ -34,16 +49,16 @@ int	ft_printf(const char *format, ...)
 
 	len = 0;
 	i = 0;
-	va_start(args, format);
-	while (format[i])
+	va_start(args, fmt);
+	while (fmt[i])
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (fmt[i] == '%' && fmt[i + 1])
 		{
 			i++;
-			len += handle_specifier(format[i], args);
+			len += handle_specifier(fmt[i], args);
 		}
 		else
-			len += ft_putchar(format[i]);
+			len += ft_putchar(fmt[i]);
 		i++;
 	}
 	va_end(args);

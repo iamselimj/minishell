@@ -6,29 +6,19 @@
 /*   By: kerberos <kerberos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:16:47 by sjacquet          #+#    #+#             */
-/*   Updated: 2025/04/27 19:22:02 by kerberos         ###   ########.fr       */
+/*   Updated: 2025/05/06 06:16:40 by kerberos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+# include "libft.h"
 
 /**
- * @function ft_gcd
-
-	* @brief Computes the greatest common divisor (GCD) of two integers `a` and `b`.
- *
-
-	* This function uses the Euclidean algorithm to calculate the GCD of two integers.
-
-	* The algorithm repeatedly replaces the larger number by the remainder of dividing
-
-	* the larger number by the smaller number until one of the numbers becomes zero.
- * The GCD is the last non-zero value.
+ * @brief Computes the greatest common divisor of two integers `a` and `b`.
  *
  * @param a (int) : The first integer.
  * @param b (int) : The second integer.
  *
- * @return (int) : The greatest common divisor of `a` and `b`.
+ * @return (int) : The GCD of `a` and `b`.
  */
 int	ft_gcd(int a, int b)
 {
